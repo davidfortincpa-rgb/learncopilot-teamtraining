@@ -267,7 +267,7 @@ h2 {
 .solution { background: #fff; }
 .solution-grid {
   display: grid;
-  grid-template-columns: 380px 1fr;
+  grid-template-columns: 460px 1fr;
   gap: 64px;
   align-items: center;
 }
@@ -278,18 +278,23 @@ h2 {
 }
 .solution-cover img {
   width: 100%;
-  max-width: 360px;
+  max-width: 440px;
   height: auto;
-  filter: drop-shadow(0 20px 48px rgba(0,0,0,0.15));
+  filter: drop-shadow(0 24px 56px rgba(0,0,0,0.18));
 }
 .solution-copy h3 { font-size: 1.4rem; font-weight: 800; color: #0B1F3A; margin-bottom: 12px; line-height: 1.3; }
-.solution-copy .course-desc { color: #6b7280; font-size: 0.97rem; line-height: 1.75; margin-bottom: 24px; }
-.value-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
-.value-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.95rem; color: #374151; line-height: 1.65; }
-.value-list li::before { content: '✅'; flex-shrink: 0; margin-top: 1px; }
-@media(max-width:768px){
+.solution-copy .course-desc { color: #6b7280; font-size: 0.97rem; line-height: 1.75; margin-bottom: 28px; }
+.value-table { width: 100%; border-collapse: collapse; }
+.value-table tr { border-bottom: 1px solid #eef2f7; }
+.value-table tr:last-child { border-bottom: none; }
+.value-table td { padding: 15px 10px 15px 0; vertical-align: top; }
+.vt-icon { font-size: 1.2rem; width: 36px; padding-right: 4px !important; }
+.vt-title { font-weight: 700; color: #0B1F3A; font-size: 0.95rem; padding-right: 20px !important; min-width: 175px; line-height: 1.4; }
+.vt-desc { font-size: 0.88rem; color: #6b7280; line-height: 1.65; }
+@media(max-width:900px){
   .solution-grid { grid-template-columns: 1fr; gap: 32px; }
-  .solution-cover img { max-width: 260px; }
+  .solution-cover img { max-width: 300px; }
+  .vt-title { min-width: auto; white-space: normal; }
 }
 
 /* ── HOW IT WORKS ── */
@@ -612,6 +617,130 @@ h2 {
   .final-cta-buttons { flex-direction: column; align-items: center; }
 }
 
+/* ── CURRICULUM ── */
+.curriculum-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.curriculum-module {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 12px;
+  padding: 20px 16px;
+}
+.module-number {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #0078D4;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+.module-name {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #0B1F3A;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.module-desc {
+  font-size: 0.8rem;
+  color: #6b7280;
+  line-height: 1.55;
+}
+.curriculum-note {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  text-align: center;
+  margin-bottom: 40px;
+  margin-top: 12px;
+}
+@media(max-width:900px){ .curriculum-grid { grid-template-columns: repeat(3, 1fr); } }
+@media(max-width:600px){ .curriculum-grid { grid-template-columns: 1fr 1fr; } }
+@media(max-width:400px){ .curriculum-grid { grid-template-columns: 1fr; } }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.animate-fade-up {
+  opacity: 0;
+  animation: fadeUp 0.55s ease forwards;
+}
+.animate-fade-in {
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+}
+.anim-delay-1 { animation-delay: 0.1s; }
+.anim-delay-2 { animation-delay: 0.22s; }
+.anim-delay-3 { animation-delay: 0.34s; }
+.anim-delay-4 { animation-delay: 0.46s; }
+.anim-delay-5 { animation-delay: 0.58s; }
+
+/* Scroll-reveal: elements start hidden, JS adds .is-visible */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* Video card hover: scale up gracefully */
+.video-card {
+  transform-origin: center;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s, box-shadow 0.3s;
+}
+.video-card:hover {
+  transform: scale(1.045);
+  border-color: rgba(255,255,255,0.45) !important;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.35);
+  z-index: 2;
+  position: relative;
+}
+
+/* Feature + step card hover lift */
+.feature-card {
+  transition: box-shadow 0.25s, border-color 0.25s, transform 0.25s;
+}
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.09);
+  border-color: #c7d8ec;
+}
+.step-card {
+  transition: box-shadow 0.25s, transform 0.25s;
+}
+.step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 32px rgba(0,0,0,0.1);
+}
+
+/* Curriculum module hover */
+.curriculum-module {
+  transition: background 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.curriculum-module:hover {
+  background: #dbeafe;
+  border-color: #93c5fd;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,120,212,0.12);
+}
+
 /* ── FOOTER ── */
 footer {
   background: #0B1F3A;
@@ -640,7 +769,7 @@ footer a { color: #60b0ff; text-decoration: none; }
 <section class="hero">
   <div class="hero-eyebrow">Microsoft 365 Copilot Training for Organizations</div>
   <h1>Your team has Copilot.<br>They're barely using it.<br><span>Let's fix that.</span></h1>
-  <p class="hero-sub">Self-paced course your employees actually finish — and immediately use at work. No scheduling headaches. No boring webinars. Real results, fast.</p>
+  <p class="hero-sub">The on-demand training that turns "I clicked it once and gave up" into saving hours every week — built by a busy professional who knows your exact pain points and where your team is losing time.</p>
   <div class="hero-buttons">
     <a href="https://courses.davidpba.com/order?ct=245975a0-8536-4539-b42b-9667cadd36ed" class="btn-primary">🎓 Enroll My Team</a>
     <a href="https://calendly.com/davidfortincpa-davidpba/30min" class="btn-secondary">📅 Book a Call with Dave</a>
@@ -680,8 +809,8 @@ footer a { color: #60b0ff; text-decoration: none; }
   <div class="container">
     <div class="section-label">The Problem</div>
     <div class="problem-quote">"Most companies are paying for Copilot. Almost none are getting value from it."</div>
-    <p>Your employees see the little Copilot icon. They click it once, it doesn't do what they expected, and they go back to doing things the old way. Sound familiar?</p>
-    <p style="margin-top:16px;">The problem isn't the tool — it's that nobody showed them how to actually use it. That's what I fix.</p>
+    <p>Your employees see the little Copilot icon. They click it once, it doesn't do what they expected, and they go back to doing things the old way. Some are using the wrong version of Copilot entirely — one that could compromise their data security — and don't even know it. Sound familiar?</p>
+    <p style="margin-top:16px;">The problem isn't the tool, it's that nobody showed them how to actually use it. Meanwhile, you're paying for those Copilot licenses every single month. Every week without training is ROI walking straight out the door. That's what I fix.</p>
   </div>
 </section>
 
@@ -698,12 +827,28 @@ footer a { color: #60b0ff; text-decoration: none; }
       <div class="solution-copy">
         <h3>Your team learns at their own pace, on their own schedule.</h3>
         <p class="course-desc">A fully self-paced course designed around how people actually work in Microsoft 365. No coordination required on your end. Buy the licenses, assign them, done.</p>
-        <ul class="value-list">
-          <li><strong>Save hours every week</strong> — Email drafts, meeting summaries, document creation. Done in a fraction of the time.</li>
-          <li><strong>Real ROI on your Copilot subscription</strong> — Most organizations use 10% of what Copilot can do. This unlocks the rest.</li>
-          <li><strong>Training they'll actually enjoy</strong> — No corporate snoozefest. Energetic, practical, and built for real humans.</li>
-          <li><strong>Immediately applicable</strong> — Every lesson is built around real work scenarios. Same-day results.</li>
-        </ul>
+        <table class="value-table">
+          <tr>
+            <td class="vt-icon">⏱</td>
+            <td class="vt-title">Save hours every week</td>
+            <td class="vt-desc">Email drafts, meeting summaries, document creation — done in a fraction of the time they're spending right now.</td>
+          </tr>
+          <tr>
+            <td class="vt-icon">💰</td>
+            <td class="vt-title">Real ROI on your Copilot subscription</td>
+            <td class="vt-desc">You're already paying for those licenses. This course makes that investment pay off in week one.</td>
+          </tr>
+          <tr>
+            <td class="vt-icon">🎯</td>
+            <td class="vt-title">Training they'll actually finish</td>
+            <td class="vt-desc">Energetic, practical, built for real professionals — not a corporate snoozefest they click through just to close the tab.</td>
+          </tr>
+          <tr>
+            <td class="vt-icon">⚡</td>
+            <td class="vt-title">Immediately applicable</td>
+            <td class="vt-desc">Every lesson is built around real work scenarios. Most employees start using what they learned the same day.</td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>
@@ -714,19 +859,19 @@ footer a { color: #60b0ff; text-decoration: none; }
   <div class="container">
     <div class="section-label">How It Works</div>
     <h2>Up and running in three steps.</h2>
-    <p class="section-sub">No procurement headaches. No IT tickets. No scheduling 30 people into a webinar. Here's how simple it actually is.</p>
+    <p class="section-sub">A fully self-serve solution — buy licenses online, assign them in minutes, and your team has access immediately. I'm still here if your team has questions at any point. Need to discuss volume pricing or want to pay by invoice? Just book a call with me.</p>
     <div class="steps-grid">
-      <div class="step-card">
+      <div class="step-card reveal reveal-delay-1">
         <div class="step-number">1</div>
         <h3>Buy your licenses online</h3>
         <p>Pick your quantity and check out instantly. Volume discounts apply automatically — no coupon codes, no back-and-forth. Takes under 2 minutes.</p>
       </div>
-      <div class="step-card">
+      <div class="step-card reveal reveal-delay-2">
         <div class="step-number">2</div>
         <h3>Assign them to your team</h3>
         <p>You get a simple dashboard to assign each license to a team member by email. No IT department needed. No installation. They get access immediately.</p>
       </div>
-      <div class="step-card">
+      <div class="step-card reveal reveal-delay-3">
         <div class="step-number">3</div>
         <h3>They learn. You see results.</h3>
         <p>Your team completes the course at their own pace — on a lunch break, between meetings, wherever. Most start using Copilot differently within the first hour.</p>
@@ -740,7 +885,35 @@ footer a { color: #60b0ff; text-decoration: none; }
   <div class="container">
     <div class="section-label">What's Inside</div>
     <h2>Here's exactly what your team gets.</h2>
-    <p class="section-sub">Everything they need to go from "I don't know where to start" to using Copilot confidently every single day.</p>
+    <p class="section-sub">Five focused modules — from Copilot Foundations to AI Agents — plus the cheat sheets and templates they'll actually keep using long after the course ends.</p>
+    <div class="curriculum-grid">
+      <div class="curriculum-module reveal reveal-delay-1">
+        <div class="module-number">Module 1</div>
+        <div class="module-name">Copilot Foundations</div>
+        <div class="module-desc">Security, licensing, AI basics — everything they need before they start, including which Copilot to actually use.</div>
+      </div>
+      <div class="curriculum-module reveal reveal-delay-2">
+        <div class="module-number">Module 2</div>
+        <div class="module-name">The Prompt School</div>
+        <div class="module-desc">The most important module. A proven prompt framework so they stop getting garbage results and start getting great ones.</div>
+      </div>
+      <div class="curriculum-module reveal reveal-delay-3">
+        <div class="module-number">Module 3</div>
+        <div class="module-name">Game-Changer Features</div>
+        <div class="module-desc">Features most people don't know exist — PDF analysis, digitizing handwritten notes, deep research, image creation.</div>
+      </div>
+      <div class="curriculum-module reveal reveal-delay-4">
+        <div class="module-number">Module 4</div>
+        <div class="module-name">Copilot in Your Apps</div>
+        <div class="module-desc">Word, Excel, PowerPoint, Outlook, Teams. Real workflows in the apps your team uses every single day.</div>
+      </div>
+      <div class="curriculum-module reveal reveal-delay-5">
+        <div class="module-number">Module 5</div>
+        <div class="module-name">Copilot Agents</div>
+        <div class="module-desc">The future of AI at work. Build no-code agents that automate repetitive tasks. No IT needed. Anyone can do this.</div>
+      </div>
+    </div>
+    <p class="curriculum-note">+ downloadable cheat sheets, prompt guides, and quizzes throughout every module</p>
     <div class="features-grid">
       <div class="feature-card">
         <span class="feature-icon">📹</span>
@@ -760,7 +933,7 @@ footer a { color: #60b0ff; text-decoration: none; }
       <div class="feature-card">
         <span class="feature-icon">🔄</span>
         <h4>Continuously updated</h4>
-        <p>Copilot is evolving fast. The course keeps up. Your team always has access to the latest features and workflows.</p>
+        <p>New lessons get added constantly — you'll notice different outfits throughout because I reshoot as the product changes. Your team always has the latest, not a course from two years ago.</p>
       </div>
       <div class="feature-card">
         <span class="feature-icon">🎯</span>
@@ -768,9 +941,9 @@ footer a { color: #60b0ff; text-decoration: none; }
         <p>Every lesson is built around actual work scenarios — not "here's a feature" demos. They learn what to use and when.</p>
       </div>
       <div class="feature-card">
-        <span class="feature-icon">📱</span>
-        <h4>Learn anywhere, anytime</h4>
-        <p>Desktop or mobile. On their lunch break, on a flight, at home. Works on any device with a browser.</p>
+        <span class="feature-icon">🤖</span>
+        <h4>Copilot Agents — included</h4>
+        <p>A full module on building no-code AI agents that automate repetitive work. This is where Copilot is headed, and your team will be ahead of the curve — not catching up in a year.</p>
       </div>
     </div>
   </div>
@@ -781,7 +954,7 @@ footer a { color: #60b0ff; text-decoration: none; }
   <div class="container">
     <div class="section-label">Pricing</div>
     <h2>Simple, transparent pricing.<br>Volume discounts apply automatically.</h2>
-    <p class="section-sub" style="margin-bottom:32px;">No coupon codes. No back-and-forth. Just pick your quantity and the right price applies at checkout.</p>
+    <p class="section-sub" style="margin-bottom:32px;">AI isn't a trend your team can afford to sit out. Every week they're not using Copilot effectively is time and money they're not getting back. At $199/license, most teams break even the moment one employee saves an afternoon of work.</p>
     <table class="pricing-table">
       <thead>
         <tr>
@@ -813,8 +986,8 @@ footer a { color: #60b0ff; text-decoration: none; }
         </tr>
         <tr>
           <td>250+</td>
-          <td><strong>$139 USD</strong></td>
-          <td>Save 30%</td>
+          <td><strong><a href="https://calendly.com/davidfortincpa-davidpba/30min" style="color:#0078D4;text-decoration:none;font-weight:700;">📅 Book a Call</a></strong></td>
+          <td>Custom pricing</td>
         </tr>
       </tbody>
     </table>
@@ -831,7 +1004,7 @@ footer a { color: #60b0ff; text-decoration: none; }
     <div class="trial-card">
       <span class="trial-icon">🎁</span>
       <h3>Not sure if it's the right fit?<br>Try it first — on me.</h3>
-      <p>I get it. You're not going to buy 30 licenses for a course you've never seen. Reach out and I'll send you a complimentary license so you can go through the course yourself before committing. No strings attached — if it's not what your team needs, no hard feelings.</p>
+      <p>I get it — you're not buying 30 licenses for something you've never seen. Reach out and I'll send you a free license. Go through the course yourself first. If it's not the right fit for your team, just say so.</p>
       <a href="mailto:davidfortincpa@davidpba.com?subject=Free Trial License Request" class="btn-outline-dark">📧 Request a Free Trial License</a>
     </div>
   </div>
@@ -918,7 +1091,7 @@ footer a { color: #60b0ff; text-decoration: none; }
     <div class="live-card">
       <div class="section-label">Not Sure Yet?</div>
       <h2>Still figuring out what's right for your team?</h2>
-      <p>No problem. Book a 20-minute call and we'll figure it out together. No pitch deck, no pressure — just a straight conversation about what your team actually needs and whether this is the right fit.</p>
+      <p>Book a 20-minute call and we'll figure it out together. A straight conversation about what your team actually needs and whether this course is the right fit.</p>
       <a href="https://calendly.com/davidfortincpa-davidpba/30min" class="btn-primary">📅 Book a Call with Dave</a>
     </div>
   </div>
@@ -952,8 +1125,8 @@ footer a { color: #60b0ff; text-decoration: none; }
 <section class="final-cta">
   <div class="container" style="max-width:800px;">
     <div class="section-label" style="color:#60b0ff;">Ready When You Are</div>
-    <h2>Ready to give your team the Copilot edge?</h2>
-    <p class="section-sub">Pick the path that makes sense for you.</p>
+    <h2>Your Copilot licenses are running.<br>Is your team actually using them?</h2>
+    <p class="section-sub">Two ways to get started — either one gets your team moving.</p>
     <div class="final-cta-buttons">
       <a href="https://courses.davidpba.com/order?ct=245975a0-8536-4539-b42b-9667cadd36ed" class="btn-primary" style="font-size:1.05rem;padding:18px 36px;">🎓 Enroll My Team</a>
       <a href="https://calendly.com/davidfortincpa-davidpba/30min" class="btn-secondary" style="font-size:1.05rem;padding:18px 36px;">📅 Book a Call with Dave</a>
@@ -967,5 +1140,18 @@ footer a { color: #60b0ff; text-decoration: none; }
   <p>© 2026 David Fortin · <a href="https://courses.davidpba.com">courses.davidpba.com</a> · <a href="https://calendly.com/davidfortincpa-davidpba/30min">Book a Call</a></p>
 </footer>
 
+<script>
+// ── Scroll-reveal ──
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('is-visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
